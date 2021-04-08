@@ -1,24 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Newquestion from './components/Newquestion';
+import Login from './components/Login';
+import ErrorPage from './components/ErrorPage';
+import FormProvider from './context/Formcontext';
+import Index from './components/Index';
+import Profile from './components/Profile';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+        <FormProvider>
+          <Navbar/>
+          <Switch>
+            <Route exact path='/' component={Index} />
+            <Route exact path='/question' component={Newquestion} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/profile/:user' component={Profile} />
+            <Route component={ErrorPage}/>
+          </Switch>
+        </FormProvider>
+      </Router>
   );
 }
 
